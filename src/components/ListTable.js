@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export default function ListTable({ rows }) {
     console.log({ rows });
     return (
@@ -12,15 +14,21 @@ export default function ListTable({ rows }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((el) => (
-            <tr key={el.sid}>
+          {rows.map((el) => {
+            const d =dayjs(el.birthday) 
+            return(<tr key={el.sid}>
               <td>{ el.sid }</td>
               <td>{ el.name }</td>
               <td>{ el.mobile }</td>
               <td>{ el.email }</td>
-              <td>{ el.birthday }</td>
+              <td>{ d.isValid() && d.format('YYYY-MM-DD') }</td>
+              {/* 原本日期格式1993-01-19T16:00:00.000Z 用dayjs轉成 2022-10-14*/}
+              {/* 當日期為空值，用d.isValid()轉成空白 */}
             </tr>
-          ))}
+            ) 
+            
+ 
+          })}
         </tbody>
       </table>
     );
