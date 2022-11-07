@@ -1,5 +1,6 @@
 
 import {useEffect, useState} from 'react';
+import { useLocation } from 'react-router-dom';
 import {AB_LIST} from './../my-config';
 import axios from 'axios';
 import ListTable from '../components/ListTable';
@@ -13,24 +14,27 @@ function AbList() {
   "page": 0,
   "rows":[],
   });
+  const location = useLocation();
+  const usp = new URLSearchParams(location.search);
+  //console.log( usp.get('page'))
 
   async function getList(){
-    const response = await axios.get(AB_LIST);
+    const response = await axios.get(AB_LIST+`?`+usp.toString());
     console.log(response);
     setListData(response.data);
   }
 
   useEffect(() => {
-    console.log(2);
+    //console.log(2);
     getList();
-  }, []);
-  console.log(1);
+  }, [location]);
+  //console.log(1);
   return (
     //   <pre>{ JSON.stringify(listData, null, 4) }</pre>
     <div className="container">
     <div className="row">
         <div className='col'>
-        <Pagination page={3} totalPages={20} />
+        <Pagination page={listData.page} totalPages={listData.totalPages} />
         </div>
     </div>  
 

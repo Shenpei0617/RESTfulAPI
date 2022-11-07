@@ -1,8 +1,11 @@
 import React from "react";
-
+import { Link ,useLocation } from "react-router-dom";
 
 //頁碼
 export default function Pagination({page,totalPages}){
+    //const location = useLocation();
+    //const usp = new URLSearchParams(location.search);
+    //console.log( usp.get('page'))
     return(
         <nav aria-label="Page navigation example">
             <ul className="pagination">
@@ -18,17 +21,19 @@ export default function Pagination({page,totalPages}){
                 if(p<1 || p>totalPages) return null;
                 if(p===page) classNames.push('active');
 
-                return <li className={classNames.join(' ')}>
-                    <a className="page-link" href="/#">
-                        {page - 5 + i}
-                    </a>
+                const link = `?page=${p}`;
+                return <li className={classNames.join(' ')} key={p}>
+                {/* key 值改成p，通常用i就可以 */}
+                    <Link className="page-link" to={link}>
+                        {p}
+                    </Link>
                 </li>
             })
         }
 
 
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="/#">
             Next
           </a>
         </li>
