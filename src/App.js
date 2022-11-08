@@ -4,6 +4,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 // import AjaxTest from './pages/AjaxTest';
 import AbList from './pages/ab-list';
 import Tmp from './pages/Tmp';
+import Login from './pages/Login';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={ <AbList /> } />
           <Route path="/tmp/:sid" element={ <Tmp /> } />
           <Route path="/tmp" element={ <Tmp /> } />
+          <Route path="/login" element={ <Login /> } />
           
         </Routes>
       </BrowserRouter>

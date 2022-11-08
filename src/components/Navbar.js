@@ -7,7 +7,8 @@ export default function Navbar() {
 
   const actives = {
     'list': 'nav-link ',
-    'tmp': 'nav-link '
+    'tmp': 'nav-link ',
+    'login':'nav-link',
   }
 
   if(actives[seg1]){
@@ -41,6 +42,11 @@ export default function Navbar() {
               <li className="nav-item">
                 <Link className={actives.tmp} to="/tmp">
                   tmp
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className={actives.tmp} to="/login">
+                  login
                 </Link>
               </li>
             </ul>
