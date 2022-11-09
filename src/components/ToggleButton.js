@@ -1,25 +1,28 @@
 import { useState } from "react";
- function ToggleButton({statusIndex}) {
-    
+
+ function ToggleButton({statusIndex ,texts}) {
     console.log({statusIndex})
     const [myIndex, setMyIndex] = useState(statusIndex);
     const classNames = ["btn"];
-    const text = myIndex === 0 ? "暗" : "亮";
+    //const text = myIndex === 0 ? "暗" : "亮";
 
-    classNames.push(statusIndex===0 ? 'btn-primary' : 'btn-outline-primary');
+    classNames.push(!myIndex ? 'btn-primary' : 'btn-outline-primary');
 
   return (
     <>
-        <button type="button" 
+        <button 
+        type="button" 
         className={classNames.join(' ')}
         onClick={()=>setMyIndex(myIndex ===0?1:0)}
-        > {text}</button>
+        > {texts [myIndex]}
+        </button>
     </>
   )
 }
 
 ToggleButton.defaultProps = {
     statusIndex: 0,
+    texts: ["關", "開"],
 }
 
 export default ToggleButton
