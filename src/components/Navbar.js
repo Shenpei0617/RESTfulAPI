@@ -50,6 +50,11 @@ const actives = {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" style={actives['list-auth']} to="/list-auth">
+                  AB-list-auth
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link"  style={actives.tmp} to="/tmp">
                   tmp
                 </Link>

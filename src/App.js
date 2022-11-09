@@ -6,22 +6,26 @@ import AbList from './pages/ab-list';
 import Tmp from './pages/Tmp';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
+import MyContextProviders from './contexts/MyContextProviders';
+import AbListAuth from './pages/ab-list-auth';
 
 function App() {
 
    return (
     <>
       <BrowserRouter>
+      <MyContextProviders>
       <Navbar/>
         <Routes>
           {/* <Route path="/" element={ <AjaxTest/> } /> */}
           <Route path="/list" element={ <AbList /> } />
+          <Route path="/list-auth" element={ <AbListAuth /> } />
           <Route path="/" element={ <AbList /> } />
           <Route path="/tmp/:sid" element={ <Tmp /> } />
           <Route path="/tmp" element={ <Tmp /> } />
-          <Route path="/login" element={ <Login /> } />
-          
+          <Route path="/login" element={ <Login /> } />   
         </Routes>
+        </MyContextProviders>
       </BrowserRouter>
     </>
 
