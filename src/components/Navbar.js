@@ -1,26 +1,36 @@
+import { useContext } from "react";
 import {Link, useLocation} from 'react-router-dom';
+import ToggleButton from './ToggleButton';
+import ThemeContext,{themes} from "../contexts/ThemeContext";
+import AuthContext from "../contexts/AuthContext";
 
 export default function Navbar() {
   const location = useLocation();
-  console.log(location.pathname);
-  const seg1 = location.pathname.split('/')[1];
-
-  const actives = {
-    'list': 'nav-link ',
-    'tmp': 'nav-link ',
-    'login':'nav-link',
+  //console.log(location.pathname);
+  
+  const { name: themeName, setTheme } = useContext(ThemeContext);
+  const { myAuth,logout } = useContext(AuthContext);
+  console.log({ themeName });
+const seg1 = location.pathname.split('/')[1];
+  
+const actives = {
+    // 'list': 'nav-link ',
+    // 'tmp': 'nav-link ',
+    // 'login':'nav-link',
   }
 
-  if(actives[seg1]){
-    actives[seg1] += 'active';
+  actives[seg1]={
+    // actives[seg1] += 'active';
+    backgroundColor: "lightblue",
+    borderRadius: "10px",
   }
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/#">
+          <Link className="navbar-brand" href="/#">
             Navbar
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -35,20 +45,49 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className={actives.list} to="/list">
+                <Link className="nav-link" style={actives.list} to="/list">
                   AB-list
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={actives.tmp} to="/tmp">
+                <Link className="nav-link"  style={actives.tmp} to="/tmp">
                   tmp
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className={actives.tmp} to="/login">
+              </ul>
+              <ul className="navbar-nav mb-2 mb-lg-0">
+              {myAuth.authorised ? (
+                 <>
+                 <li className="nav-item">
+                 <a className="nav-link" href="/#">
+                      {myAuth.account}
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#" onClick={(e)=>{ 
+                       e.preventDefault();
+                      logout();
+                      }}>
+                      登出
+                    </a>               
+              </li>
+              </>
+              ):(
+                <Link className="nav-link"  style={actives.login} to="/login">
                   login
                 </Link>
+            )}
+            
+            <li className="nav-item">
+                <ToggleButton 
+                      texts={["暗", "亮"]}
+                  statusIndex={themeName === "dark" ? 0 : 1}
+                  handler={(i) => {
+                    setTheme(i === 0 ? themes.dark : themes.light);
+                  }}
+                />
               </li>
+            
             </ul>
           </div>
         </div>
