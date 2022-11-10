@@ -4,6 +4,7 @@ import ToggleButton from './ToggleButton';
 import ThemeContext,{themes} from "../contexts/ThemeContext";
 import AuthContext from "../contexts/AuthContext";
 
+
 export default function Navbar() {
   const location = useLocation();
   //console.log(location.pathname);
@@ -57,6 +58,11 @@ const actives = {
               <li className="nav-item">
                 <Link className="nav-link"  style={actives.tmp} to="/tmp">
                   tmp
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link"  style={actives.canvas1} to="/canvas1">
+                  canvas1
                 </Link>
               </li>
               </ul>

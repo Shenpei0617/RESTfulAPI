@@ -9,6 +9,8 @@ import Navbar from './components/Navbar';
 import MyContextProviders from './contexts/MyContextProviders';
 import AbListAuth from './pages/ab-list-auth';
 
+import Canvas1 from './pages/Canavas';
+
 function App() {
 
    return (
@@ -24,6 +26,7 @@ function App() {
           <Route path="/tmp/:sid" element={ <Tmp /> } />
           <Route path="/tmp" element={ <Tmp /> } />
           <Route path="/login" element={ <Login /> } />   
+          <Route path="/canvas1" element={ <Canvas1 /> } />   
         </Routes>
         </MyContextProviders>
       </BrowserRouter>
