@@ -16,7 +16,10 @@ function Canvas1() {
             console.log(CurrentCart);
         }
     }
-    const cartRemove = () => {};
+    const cartRemove = (tid) => {
+        const newCart = cart.filter((el)=>el.tid !== tid);
+        setCart(newCart);
+    };
 
     useEffect(()=>{
         const ctx = cRef.current.getContext('2d');
@@ -56,7 +59,7 @@ function Canvas1() {
                 key={el.tid}
                 width="50"
                 onClick={() => {
-                  // cartAdd(el.id);
+                    cartRemove(el.tid);
                 }}
               />
             );
