@@ -4,7 +4,19 @@ import{productData}from "./../data/product-data"
 function Canvas1() {
 
     const cRef = useRef()
+    const [cart,setCart ] = useState([]);
     
+    const cartAdd=(pid)=>{
+        let p =productData.find((el)=>{return el.id===pid})
+        if(p){
+            p={...p};
+            p.tid =Date.now();
+            const CurrentCart=[...cart,p];
+            setCart(CurrentCart);
+            console.log(CurrentCart);
+        }
+    }
+    const cartRemove = () => {};
 
     useEffect(()=>{
         const ctx = cRef.current.getContext('2d');
@@ -22,8 +34,34 @@ function Canvas1() {
       <div className="row">
         <div className="col">
             {productData.map((el)=>{
-                return <img src={"images/"+el.img} alt={el.name} key={el.id} width="150"/>
+                return (
+                    <img 
+                    src={"images/"+el.img} 
+                    alt={el.name} key={el.id} 
+                    width="150" 
+                    onClick={() => {
+                  cartAdd(el.id);
+                }}/>
+                )
             })}
+            </div>
+            </div>
+            <div className="row">
+        <div className="col">
+          {cart.map((el) => {
+            return (
+              <img
+                src={"/images/" + el.img}
+                alt={el.name}
+                key={el.tid}
+                width="50"
+                onClick={() => {
+                  // cartAdd(el.id);
+                }}
+              />
+            );
+          })}
+        
         </div>
       </div>
         <canvas
